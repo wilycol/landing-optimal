@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Play, ChevronLeft, ChevronRight, Settings, ArrowRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -39,13 +39,6 @@ const services = [
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [formData, setFormData] = useState({
-    name: '',
-    mobile: '',
-    email: '',
-    service: '',
-    message: '',
-  });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -174,100 +167,33 @@ export default function Hero() {
           </div>
         </div>
       </div>
-    </section>
-  );
-}
-                {index === currentSlide && (
-                  <>
-                  </>
-                )}
-              </div>
-            ))}
-          </div>
-
-          {/* Right Form - Floating Card Style */}
-          <div className="hidden lg:block z-10 relative">
-            <div className="bg-white rounded-3xl p-8 shadow-2xl max-w-md ml-auto animate-in slide-in-from-right duration-700">
-              <div className="mb-6">
-                <span className="text-secondary font-semibold text-sm uppercase tracking-wider">Book Now</span>
-                <h3 className="text-2xl font-bold text-primary mt-1">Online Appointment</h3>
-              </div>
-              
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <Input 
-                    placeholder="Your Name" 
-                    className="h-12 bg-gray-50 border-gray-200 focus:border-secondary focus:ring-secondary rounded-xl"
-                  />
-                  <Input 
-                    placeholder="Phone Number" 
-                    className="h-12 bg-gray-50 border-gray-200 focus:border-secondary focus:ring-secondary rounded-xl"
-                  />
-                </div>
-                
-                <Input 
-                  placeholder="Email Address" 
-                  className="h-12 bg-gray-50 border-gray-200 focus:border-secondary focus:ring-secondary rounded-xl"
-                />
-                
-                <Select>
-                  <SelectTrigger className="h-12 bg-gray-50 border-gray-200 focus:border-secondary focus:ring-secondary rounded-xl text-gray-500">
-                    <SelectValue placeholder="Select Service" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {services.map((s) => (
-                      <SelectItem key={s} value={s.toLowerCase()}>{s}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                
-                <Textarea 
-                  placeholder="Message" 
-                  className="min-h-[100px] bg-gray-50 border-gray-200 focus:border-secondary focus:ring-secondary rounded-xl resize-none"
-                />
-                
-                <Button type="submit" className="w-full h-12 bg-secondary hover:bg-secondary/90 text-white font-bold rounded-xl text-base shadow-lg shadow-secondary/25 transition-all hover:scale-[1.02]">
-                  Get Appointment
-                </Button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
-            </form>
-          </div>
-        </div>
-      </div>
 
       {/* Slide Navigation */}
-      <div className="absolute bottom-8 left-4 flex gap-2">
+      <div className="hidden md:flex absolute bottom-8 left-12 gap-2 z-20">
         <button
           onClick={prevSlide}
-          className="w-12 h-12 bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-[#0072ff] transition-colors"
+          className="w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-secondary hover:border-secondary transition-all duration-300 group rounded-full"
         >
-          <ChevronLeft className="w-6 h-6 text-white" />
+          <ChevronLeft className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
         </button>
         <button
           onClick={nextSlide}
-          className="w-12 h-12 bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-[#0072ff] transition-colors"
+          className="w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-secondary hover:border-secondary transition-all duration-300 group rounded-full"
         >
-          <ChevronRight className="w-6 h-6 text-white" />
+          <ChevronRight className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
         </button>
       </div>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20">
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
-            className={`w-3 h-3 rounded-full transition-colors ${
-              index === currentSlide ? 'bg-[#0072ff]' : 'bg-white/50'
+            className={`transition-all duration-300 rounded-full ${
+              index === currentSlide 
+                ? 'w-8 h-2 bg-secondary' 
+                : 'w-2 h-2 bg-white/50 hover:bg-white'
             }`}
           />
         ))}

@@ -3,15 +3,6 @@ import { MapPin, Phone, Mail, Clock, Send, Facebook, Twitter, Linkedin, Instagra
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
-const quickLinks = [
-  { name: 'Home', href: '#home' },
-  { name: 'About Us', href: '#about' },
-  { name: 'Services', href: '#services' },
-  { name: 'Portfolio', href: '#portfolio' },
-  { name: 'Testimonials', href: '#testimonials' },
-  { name: 'Blog', href: '#blog' },
-];
-
 export default function Footer() {
   const [email, setEmail] = useState('');
 
@@ -19,13 +10,6 @@ export default function Footer() {
     e.preventDefault();
     alert('Thank you for subscribing!');
     setEmail('');
-  };
-
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
   };
 
   return (

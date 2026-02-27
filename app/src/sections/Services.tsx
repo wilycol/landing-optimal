@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { ArrowRight, Droplets, Home, Wrench, Building2, Bath, Sun } from 'lucide-react';
 
 const services = [
@@ -47,8 +46,6 @@ const services = [
 ];
 
 export default function Services() {
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
-
   return (
     <section id="services" className="py-24 bg-[#f4f5f8]">
       <div className="container mx-auto px-4">
@@ -77,8 +74,6 @@ export default function Services() {
               <div
                 key={service.id}
                 className="group relative bg-white rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/5"
-                onMouseEnter={() => setHoveredId(service.id)}
-                onMouseLeave={() => setHoveredId(null)}
               >
                 {/* Image Area */}
                 <div className="relative h-64 overflow-hidden">
