@@ -1,165 +1,237 @@
-import { Download, ArrowRight, Cpu, Zap, Shield } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Play, ChevronLeft, ChevronRight, Settings, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { AnimatedSection } from '@/components/AnimatedSection';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
-export function Hero() {
+const slides = [
+  {
+    id: 1,
+    subtitle: 'Optimal X is professionalism in the cleaning industry by providing top-quality cleaning and related services',
+    title: 'We are Professional',
+    titleHighlight: 'Cleaning Services',
+    image: '/images/hero-bg.jpg',
+  },
+  {
+    id: 2,
+    subtitle: 'We provide exceptional service with attention to detail and customer satisfaction guaranteed',
+    title: 'Expert Team for',
+    titleHighlight: 'Your Home & Office',
+    image: '/images/about-team.jpg',
+  },
+];
+
+const services = [
+  'House Cleaning',
+  'Indoor Cleaning',
+  'Plumbing Services',
+  'Bathroom Cleaning',
+  'Outdoor Cleaning',
+  'Window Cleaning',
+];
+
+export default function Hero() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [formData, setFormData] = useState({
+    name: '',
+    mobile: '',
+    email: '',
+    service: '',
+    message: '',
+  });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert('Thank you for your request! We will contact you soon.');
+  };
+
   return (
-    <section
-      id="home"
-      className="relative min-h-screen flex items-center pt-20 overflow-hidden"
-    >
-      {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-background dark:from-primary/10" />
-      
-      {/* Animated Background Shapes */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Floating Orbs */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl animate-pulse delay-500" />
-        
-        {/* Animated Grid Pattern */}
-        <div 
-          className="absolute inset-0 opacity-[0.02] dark:opacity-[0.05]"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, currentColor 1px, transparent 1px),
-              linear-gradient(to bottom, currentColor 1px, transparent 1px)
-            `,
-            backgroundSize: '60px 60px'
-          }}
-        />
-        
-        {/* Floating Particles */}
-        {[...Array(6)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-2 h-2 bg-primary/30 rounded-full animate-bounce"
-            style={{
-              left: `${15 + i * 15}%`,
-              top: `${20 + (i % 3) * 25}%`,
-              animationDelay: `${i * 0.5}s`,
-              animationDuration: `${3 + i * 0.5}s`,
-            }}
+    <section id="home" className="relative min-h-[700px] lg:min-h-[800px] overflow-hidden">
+      {/* Background Slides */}
+      {slides.map((slide, index) => (
+        <div
+          key={slide.id}
+          className={`absolute inset-0 transition-opacity duration-1000 ${
+            index === currentSlide ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          <div 
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${slide.image})` }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
+        </div>
+      ))}
+
+      {/* Content */}
+      <div className="relative container mx-auto px-4 py-20 lg:py-32">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Content */}
+          <div className="text-white">
+            {slides.map((slide, index) => (
+              <div
+                key={slide.id}
+                className={`transition-all duration-700 ${
+                  index === currentSlide 
+                    ? 'opacity-100 translate-y-0' 
+                    : 'opacity-0 translate-y-8 absolute'
+                }`}
+              >
+                {index === currentSlide && (
+                  <>
+                    <p className="text-lg mb-4 max-w-lg">{slide.subtitle}</p>
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2">
+                      {slide.title}
+                    </h1>
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#00c853] mb-8">
+                      {slide.titleHighlight}
+                    </h2>
+                  </>
+                )}
+              </div>
+            ))}
+
+            {/* Video Button */}
+            <div className="flex items-center gap-6 mt-8">
+              <a 
+                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 group"
+              >
+                <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-[#0072ff] transition-colors">
+                  <Play className="w-6 h-6 text-white ml-1" fill="white" />
+                </div>
+                <span className="text-white font-medium">Watch Our Video</span>
+              </a>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap gap-4 mt-10">
+              <a 
+                href="#services"
+                className="inline-flex items-center gap-2 bg-[#0072ff] text-white px-6 py-3 rounded-full font-medium hover:bg-[#005bb5] transition-colors"
+              >
+                Our Services
+                <Settings className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+
+          {/* Right Content - Quote Form */}
+          <div className="bg-[#0072ff] rounded-lg p-6 lg:p-8 shadow-2xl">
+            <div className="text-center mb-6">
+              <p className="text-white/80 text-sm mb-1">24 / 7 Hours Service</p>
+              <h3 className="text-2xl font-bold text-white">Online Appointment</h3>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <Input
+                type="text"
+                placeholder="Your name*"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                className="bg-white/10 border-white/20 text-white placeholder:text-white/60 h-12"
+                required
+              />
+              <Input
+                type="tel"
+                placeholder="Mobile number*"
+                value={formData.mobile}
+                onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
+                className="bg-white/10 border-white/20 text-white placeholder:text-white/60 h-12"
+                required
+              />
+              <Input
+                type="email"
+                placeholder="Mail address*"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className="bg-white/10 border-white/20 text-white placeholder:text-white/60 h-12"
+                required
+              />
+              <Select
+                value={formData.service}
+                onValueChange={(value) => setFormData({ ...formData, service: value })}
+              >
+                <SelectTrigger className="bg-white/10 border-white/20 text-white h-12 [&>span]:text-white/60">
+                  <SelectValue placeholder="Choose services" />
+                </SelectTrigger>
+                <SelectContent>
+                  {services.map((service) => (
+                    <SelectItem key={service} value={service.toLowerCase().replace(' ', '-')}>
+                      {service}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Textarea
+                placeholder="Type message..."
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                className="bg-white/10 border-white/20 text-white placeholder:text-white/60 min-h-[100px] resize-none"
+              />
+              <Button 
+                type="submit"
+                className="w-full bg-[#0a1a3a] hover:bg-[#0d2249] text-white h-12 text-lg font-medium"
+              >
+                Get a Quote
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      {/* Slide Navigation */}
+      <div className="absolute bottom-8 left-4 flex gap-2">
+        <button
+          onClick={prevSlide}
+          className="w-12 h-12 bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-[#0072ff] transition-colors"
+        >
+          <ChevronLeft className="w-6 h-6 text-white" />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="w-12 h-12 bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-[#0072ff] transition-colors"
+        >
+          <ChevronRight className="w-6 h-6 text-white" />
+        </button>
+      </div>
+
+      {/* Slide Indicators */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            className={`w-3 h-3 rounded-full transition-colors ${
+              index === currentSlide ? 'bg-[#0072ff]' : 'bg-white/50'
+            }`}
           />
         ))}
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Logo Animation */}
-          <AnimatedSection animation="zoom-in" duration={800}>
-            <div className="mb-8 flex justify-center">
-              <div className="relative">
-                <img
-                  src="/favicon.png"
-                  alt="CleanMate AI"
-                  className="w-20 h-20 md:w-24 md:h-24 animate-float"
-                />
-                {/* Glow Effect */}
-                <div className="absolute inset-0 w-20 h-20 md:w-24 md:h-24 bg-primary/30 rounded-full blur-xl animate-pulse" />
-              </div>
-            </div>
-          </AnimatedSection>
-
-          {/* Badge */}
-          <AnimatedSection animation="fade-up" delay={200} duration={600}>
-            <Badge
-              variant="secondary"
-              className="mb-6 px-4 py-2 text-sm font-medium inline-flex items-center gap-2 hover:scale-105 transition-transform cursor-default"
-            >
-              <Zap className="w-4 h-4 text-primary animate-pulse" />
-              Potenciado por Groq AI
-            </Badge>
-          </AnimatedSection>
-
-          {/* Title */}
-          <AnimatedSection animation="fade-up" delay={300} duration={600}>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
-              Optimización{' '}
-              <span className="text-primary bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-                Inteligente
-              </span>{' '}
-              para Windows
-            </h1>
-          </AnimatedSection>
-
-          {/* Description */}
-          <AnimatedSection animation="fade-up" delay={400} duration={600}>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-              Monitorea CPU, RAM y Disco en tiempo real. Recibe recomendaciones claras
-              basadas en métricas reales del sistema. Sin procesos ocultos. Sin adware.
-              Sin riesgos innecesarios.
-            </p>
-          </AnimatedSection>
-
-          {/* CTA Buttons */}
-          <AnimatedSection animation="fade-up" delay={500} duration={600}>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-              <Button
-                size="lg"
-                className="w-full sm:w-auto px-8 py-6 text-lg group relative overflow-hidden"
-                asChild
-              >
-                <a
-                  href="https://github.com/wilycol/CleanMateAI/releases/download/v1.0.3/CleanMate.AI.Setup.1.0.3.exe"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="absolute inset-0 bg-gradient-to-r from-primary/0 via-white/20 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                  <Download className="w-5 h-5 mr-2 group-hover:animate-bounce" />
-                  Descargar versión MVP
-                  <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
-                </a>
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="w-full sm:w-auto px-8 py-6 text-lg group hover:bg-primary hover:text-primary-foreground transition-all duration-300"
-                asChild
-              >
-                <a href="#features">
-                  Ver Características
-                  <ArrowRight className="w-5 h-5 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                </a>
-              </Button>
-            </div>
-          </AnimatedSection>
-
-          {/* Version Info */}
-          <AnimatedSection animation="fade-up" delay={600} duration={600}>
-            <p className="text-sm text-muted-foreground mb-16">
-              Versión 1.0.3 | Compatible con Windows 10/11
-            </p>
-          </AnimatedSection>
-
-          {/* Feature Pills */}
-          <AnimatedSection animation="fade-up" delay={700} duration={600}>
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              {[
-                { icon: Cpu, text: 'Monitoreo en Tiempo Real' },
-                { icon: Zap, text: 'IA Nativa' },
-                { icon: Shield, text: '100% Seguro' },
-              ].map((feature, index) => (
-                <div
-                  key={index}
-                  className="group flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-1"
-                >
-                  <feature.icon className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
-                  <span className="text-sm font-medium">{feature.text}</span>
-                </div>
-              ))}
-            </div>
-          </AnimatedSection>
-        </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 rounded-full border-2 border-border flex items-start justify-center p-2 hover:border-primary transition-colors cursor-pointer">
-          <div className="w-1.5 h-3 bg-primary rounded-full animate-pulse" />
-        </div>
       </div>
     </section>
   );

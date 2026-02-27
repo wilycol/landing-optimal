@@ -1,132 +1,179 @@
-import { Sparkles, Github, ExternalLink, Heart } from 'lucide-react';
+import { useState } from 'react';
+import { MapPin, Phone, Mail, Clock, Send, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
-const footerLinks = {
-  producto: [
-    { label: 'Descargar', href: 'https://github.com/wilycol/CleanMateAI/releases/download/v1.0.3/CleanMate.AI.Setup.1.0.3.exe' },
-    { label: 'Características', href: '#features' },
-    { label: 'Cómo Funciona', href: '#how-it-works' },
-    { label: 'FAQ', href: '#faq' },
-  ],
-  recursos: [
-    { label: 'GitHub', href: 'https://github.com/wilycol/CleanMateAI' },
-    { label: 'Releases', href: 'https://github.com/wilycol/CleanMateAI/releases' },
-    { label: 'Issues', href: 'https://github.com/wilycol/CleanMateAI/issues' },
-  ],
-  desarrollador: [
-    { label: 'Willy Dev\'s', href: 'https://wilycol.github.io/wily-dev/' },
-    { label: 'LinkedIn', href: '#' },
-    { label: 'GitHub', href: 'https://github.com/wilycol' },
-  ],
-};
+const quickLinks = [
+  { name: 'Home', href: '#home' },
+  { name: 'About Us', href: '#about' },
+  { name: 'Services', href: '#services' },
+  { name: 'Portfolio', href: '#portfolio' },
+  { name: 'Testimonials', href: '#testimonials' },
+  { name: 'Blog', href: '#blog' },
+];
 
-export function Footer() {
-  const currentYear = new Date().getFullYear();
+export default function Footer() {
+  const [email, setEmail] = useState('');
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert('Thank you for subscribing!');
+    setEmail('');
+  };
+
+  const scrollToSection = (href: string) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
-    <footer className="bg-muted/50 border-t border-border">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Brand */}
-          <div className="lg:col-span-1">
-            <a href="#home" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-primary-foreground" />
-              </div>
-              <span className="text-xl font-bold text-foreground">CleanMate AI</span>
-            </a>
-            <p className="text-muted-foreground mb-6">
-              Optimización inteligente y asistida para Windows. Potenciado por Groq AI.
+    <footer className="bg-[#0a1a3a] text-white">
+      {/* Main Footer */}
+      <div className="container mx-auto px-4 py-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+          {/* Company Info */}
+          <div>
+            <div className="mb-6">
+              <img 
+                src="/images/logo-optimal-x.jpg" 
+                alt="Optimal X" 
+                className="h-16 w-auto object-contain bg-white rounded-lg p-2"
+              />
+            </div>
+            <h3 className="text-xl font-bold mb-4">We are Optimal X!</h3>
+            <p className="text-white/70 text-sm mb-6 leading-relaxed">
+              We work with a passion of taking challenges and creating new ones in advertising sector.
             </p>
-            <div className="flex items-center gap-3">
-              <a
-                href="https://github.com/wilycol/CleanMateAI"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-card border border-border flex items-center justify-center hover:bg-accent transition-colors"
-              >
-                <Github className="w-5 h-5" />
-              </a>
-              <a
-                href="https://wilycol.github.io/wily-dev/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-card border border-border flex items-center justify-center hover:bg-accent transition-colors"
-              >
-                <ExternalLink className="w-5 h-5" />
-              </a>
+            <div className="space-y-3">
+              <div className="flex items-center gap-3 text-sm">
+                <Clock className="w-4 h-4 text-[#00c853]" />
+                <span className="text-white/70">Open Hours:</span>
+              </div>
+              <p className="text-white/70 text-sm pl-7">
+                Mon – Sat: 8 am – 5 pm,<br />
+                Sunday: CLOSED
+              </p>
             </div>
           </div>
 
-          {/* Links */}
+          {/* Newsletter */}
           <div>
-            <h4 className="font-semibold text-foreground mb-4">Producto</h4>
-            <ul className="space-y-3">
-              {footerLinks.producto.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <h3 className="text-xl font-bold mb-6">Newsletter</h3>
+            <p className="text-white/70 text-sm mb-4">
+              Subscribe our newsletter to get our latest update & news
+            </p>
+            <form onSubmit={handleSubscribe} className="space-y-3">
+              <div className="relative">
+                <Input
+                  type="email"
+                  placeholder="Your email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="bg-white/10 border-white/20 text-white placeholder:text-white/50 pr-12 h-12"
+                  required
+                />
+                <Button 
+                  type="submit"
+                  size="icon"
+                  className="absolute right-1 top-1 h-10 w-10 bg-[#0072ff] hover:bg-[#005bb5]"
+                >
+                  <Send className="w-4 h-4" />
+                </Button>
+              </div>
+            </form>
+
+            {/* Social Links */}
+            <div className="mt-6">
+              <p className="text-white/70 text-sm mb-3">Follow us:</p>
+              <div className="flex gap-3">
+                <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#0072ff] transition-colors">
+                  <Facebook className="w-4 h-4" />
+                </a>
+                <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#0072ff] transition-colors">
+                  <Twitter className="w-4 h-4" />
+                </a>
+                <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#0072ff] transition-colors">
+                  <Linkedin className="w-4 h-4" />
+                </a>
+                <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#0072ff] transition-colors">
+                  <Instagram className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
           </div>
 
+          {/* Official Info */}
           <div>
-            <h4 className="font-semibold text-foreground mb-4">Recursos</h4>
-            <ul className="space-y-3">
-              {footerLinks.recursos.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <h3 className="text-xl font-bold mb-6">Official info:</h3>
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-[#00c853] flex-shrink-0 mt-0.5" />
+                <p className="text-white/70 text-sm">
+                  30 Commercial Road Fratton,<br />
+                  Australia
+                </p>
+              </div>
+              <div className="flex items-center gap-3">
+                <Phone className="w-5 h-5 text-[#00c853] flex-shrink-0" />
+                <a href="tel:+18884521505" className="text-white/70 text-sm hover:text-[#00c853] transition-colors">
+                  1-888-452-1505
+                </a>
+              </div>
+              <div className="flex items-center gap-3">
+                <Mail className="w-5 h-5 text-[#00c853] flex-shrink-0" />
+                <a href="mailto:info@optimalx.com" className="text-white/70 text-sm hover:text-[#00c853] transition-colors">
+                  info@optimalx.com
+                </a>
+              </div>
+              <div className="flex items-center gap-3">
+                <Mail className="w-5 h-5 text-[#00c853] flex-shrink-0" />
+                <a href="mailto:support@optimalx.com" className="text-white/70 text-sm hover:text-[#00c853] transition-colors">
+                  support@optimalx.com
+                </a>
+              </div>
+            </div>
           </div>
 
+          {/* Quick Links */}
           <div>
-            <h4 className="font-semibold text-foreground mb-4">Desarrollador</h4>
+            <h3 className="text-xl font-bold mb-6">Quick Links</h3>
             <ul className="space-y-3">
-              {footerLinks.desarrollador.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+              {quickLinks.map((link) => (
+                <li key={link.name}>
+                  <button
+                    onClick={() => scrollToSection(link.href)}
+                    className="text-white/70 text-sm hover:text-[#00c853] transition-colors"
                   >
-                    {link.label}
-                  </a>
+                    {link.name}
+                  </button>
                 </li>
               ))}
             </ul>
           </div>
         </div>
+      </div>
 
-        {/* Bottom */}
-        <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-muted-foreground text-sm text-center md:text-left">
-            © {currentYear} CleanMate AI. Desarrollado por{' '}
-            <a
-              href="https://wilycol.github.io/wily-dev/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:underline"
-            >
-              Willy Dev's
-            </a>
-          </p>
-          <p className="text-muted-foreground text-sm flex items-center gap-1">
-            Hecho con <Heart className="w-4 h-4 text-red-500 fill-red-500" /> y Groq AI
-          </p>
+      {/* Bottom Bar */}
+      <div className="border-t border-white/10">
+        <div className="container mx-auto px-4 py-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-white/60 text-sm text-center md:text-left">
+              © {new Date().getFullYear()} All rights reserved by{' '}
+              <a href="#" className="text-[#0072ff] hover:text-[#00c853] transition-colors">
+                Optimal X
+              </a>
+            </p>
+            <div className="flex gap-6">
+              <a href="#" className="text-white/60 text-sm hover:text-[#00c853] transition-colors">
+                Privacy Policy
+              </a>
+              <a href="#" className="text-white/60 text-sm hover:text-[#00c853] transition-colors">
+                Terms of Service
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

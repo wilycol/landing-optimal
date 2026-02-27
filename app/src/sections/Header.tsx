@@ -1,28 +1,28 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-import { ThemeToggle } from '@/components/ThemeToggle';
+import { Phone, Mail, Facebook, Twitter, Linkedin, Instagram, Search, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { Input } from '@/components/ui/input';
 
 const navLinks = [
-  { label: 'Inicio', href: '#home' },
-  { label: 'Sobre', href: '#about' },
-  { label: 'Características', href: '#features' },
-  { label: 'Screenshots', href: '#screenshots' },
-  { label: 'Cómo Funciona', href: '#how-it-works' },
-  { label: 'FAQ', href: '#faq' },
-  { label: 'Contacto', href: '#contact' },
+  { name: 'Home', href: '#home' },
+  { name: 'About', href: '#about' },
+  { name: 'Services', href: '#services' },
+  { name: 'Portfolio', href: '#portfolio' },
+  { name: 'Testimonials', href: '#testimonials' },
+  { name: 'Blog', href: '#blog' },
+  { name: 'Contact', href: '#contact' },
 ];
 
-export function Header() {
+export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 100);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -35,117 +35,141 @@ export function Header() {
   };
 
   return (
-    <header
-      className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        isScrolled
-          ? 'bg-background/80 backdrop-blur-lg shadow-sm border-b border-border'
-          : 'bg-transparent'
-      )}
-    >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
-          <a
-            href="#home"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToSection('#home');
-            }}
-            className="flex items-center gap-2 group"
-          >
-            <img
-              src="/favicon.png"
-              alt="CleanMate AI"
-              className="w-10 h-10 rounded-xl transition-transform group-hover:scale-110"
-            />
-            <span className="text-xl font-bold text-foreground">CleanMate AI</span>
-          </a>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(link.href);
-                }}
-                className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-accent"
-              >
-                {link.label}
+    <header className="w-full">
+      {/* Top Bar */}
+      <div className="bg-[#0a1a3a] text-white py-2.5">
+        <div className="container mx-auto px-4 flex flex-wrap items-center justify-between">
+          <div className="flex items-center gap-6 text-sm">
+            <div className="flex items-center gap-2">
+              <Phone className="w-4 h-4 text-[#00c853]" />
+              <span className="text-gray-400">Call for help:</span>
+              <a href="tel:+12354623257" className="hover:text-[#00c853] transition-colors">
+                (+123) 5462 3257
               </a>
-            ))}
-          </nav>
-
-          {/* Actions */}
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            <Button
-              asChild
-              className="hidden sm:inline-flex"
-            >
-              <a
-                href="https://github.com/wilycol/CleanMateAI/releases/download/v1.0.3/CleanMate.AI.Setup.1.0.3.exe"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Descargar
+            </div>
+            <div className="hidden sm:flex items-center gap-2">
+              <Mail className="w-4 h-4 text-[#00c853]" />
+              <span className="text-gray-400">Mail to us:</span>
+              <a href="mailto:info@optimalx.com" className="hover:text-[#00c853] transition-colors">
+                info@optimalx.com
               </a>
-            </Button>
-            
-            {/* Mobile Menu Button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? (
-                <X className="w-5 h-5" />
-              ) : (
-                <Menu className="w-5 h-5" />
-              )}
-            </Button>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#0072ff] transition-colors">
+              <Facebook className="w-4 h-4" />
+            </a>
+            <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#0072ff] transition-colors">
+              <Twitter className="w-4 h-4" />
+            </a>
+            <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#0072ff] transition-colors">
+              <Linkedin className="w-4 h-4" />
+            </a>
+            <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#0072ff] transition-colors">
+              <Instagram className="w-4 h-4" />
+            </a>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <div
-        className={cn(
-          'md:hidden overflow-hidden transition-all duration-300',
-          isMobileMenuOpen ? 'max-h-96' : 'max-h-0'
-        )}
-      >
-        <div className="bg-background/95 backdrop-blur-lg border-b border-border px-4 py-4 space-y-2">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection(link.href);
-              }}
-              className="block px-4 py-3 text-foreground hover:bg-accent rounded-lg transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
-          <Button
-            asChild
-            className="w-full mt-4"
-          >
-            <a
-              href="https://github.com/wilycol/CleanMateAI/releases/download/v1.0.3/CleanMate.AI.Setup.1.0.3.exe"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Descargar
-            </a>
-          </Button>
+      {/* Main Navigation */}
+      <div className={`transition-all duration-300 ${isScrolled ? 'fixed top-0 left-0 right-0 z-50 shadow-lg' : ''}`}>
+        <div className={`${isScrolled ? 'bg-white' : 'bg-[#0072ff]'}`}>
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-between h-20">
+              {/* Logo */}
+              <a href="#home" className="flex items-center">
+                <img 
+                  src="/images/logo-optimal-x.jpg" 
+                  alt="Optimal X" 
+                  className="h-14 w-auto object-contain"
+                />
+              </a>
+
+              {/* Desktop Navigation */}
+              <nav className="hidden lg:flex items-center gap-1">
+                {navLinks.map((link) => (
+                  <button
+                    key={link.name}
+                    onClick={() => scrollToSection(link.href)}
+                    className={`px-4 py-2 text-sm font-medium transition-colors ${
+                      isScrolled 
+                        ? 'text-gray-700 hover:text-[#0072ff]' 
+                        : 'text-white hover:text-white/80'
+                    }`}
+                  >
+                    {link.name}
+                  </button>
+                ))}
+              </nav>
+
+              {/* Search & Mobile Menu */}
+              <div className="flex items-center gap-3">
+                {/* Search */}
+                <div className="relative hidden md:block">
+                  {isSearchOpen ? (
+                    <div className="flex items-center">
+                      <Input 
+                        type="text" 
+                        placeholder="Search..." 
+                        className="w-48 h-9 text-sm"
+                        autoFocus
+                      />
+                      <Button 
+                        variant="ghost" 
+                        size="icon" 
+                        className="ml-1"
+                        onClick={() => setIsSearchOpen(false)}
+                      >
+                        <X className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  ) : (
+                    <Button 
+                      variant="ghost" 
+                      size="icon"
+                      onClick={() => setIsSearchOpen(true)}
+                      className={isScrolled ? 'text-gray-700' : 'text-white hover:text-white/80'}
+                    >
+                      <Search className="w-5 h-5" />
+                    </Button>
+                  )}
+                </div>
+
+                {/* Mobile Menu Button */}
+                <Button 
+                  variant="ghost" 
+                  size="icon"
+                  className="lg:hidden"
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                >
+                  {isMobileMenuOpen ? (
+                    <X className={`w-6 h-6 ${isScrolled ? 'text-gray-700' : 'text-white'}`} />
+                  ) : (
+                    <Menu className={`w-6 h-6 ${isScrolled ? 'text-gray-700' : 'text-white'}`} />
+                  )}
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden bg-white shadow-lg">
+            <nav className="flex flex-col py-4">
+              {navLinks.map((link) => (
+                <button
+                  key={link.name}
+                  onClick={() => scrollToSection(link.href)}
+                  className="px-6 py-3 text-left text-gray-700 hover:bg-gray-50 hover:text-[#0072ff] transition-colors"
+                >
+                  {link.name}
+                </button>
+              ))}
+            </nav>
+          </div>
+        )}
       </div>
     </header>
   );
