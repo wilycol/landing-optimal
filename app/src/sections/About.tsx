@@ -46,9 +46,9 @@ function Counter({ end, suffix = '', duration = 2000 }: { end: number; suffix?: 
   }, [isVisible, end, duration]);
 
   return (
-    <div ref={ref} className="text-4xl lg:text-5xl font-bold text-[#0072ff]">
+    <div ref={ref} className="text-4xl lg:text-5xl font-bold text-primary">
       {count}
-      <span className="text-[#00c853]">{suffix}</span>
+      <span className="text-secondary">{suffix}</span>
     </div>
   );
 }
@@ -68,7 +68,7 @@ export default function About() {
               />
             </div>
             {/* Experience Badge */}
-            <div className="absolute -bottom-6 -right-6 bg-[#0072ff] text-white p-6 rounded-lg shadow-xl">
+            <div className="absolute -bottom-6 -right-6 bg-primary text-white p-6 rounded-lg shadow-xl">
               <div className="text-5xl font-bold">15</div>
               <div className="text-sm">Years of<br />Experience</div>
             </div>
@@ -77,13 +77,13 @@ export default function About() {
           {/* Right - Content */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <Sparkles className="w-5 h-5 text-[#00c853]" />
-              <span className="text-[#0072ff] font-medium">About Cleaning Agency</span>
+              <Sparkles className="w-5 h-5 text-secondary" />
+              <span className="text-primary font-medium">About Cleaning Agency</span>
             </div>
             
             <h2 className="text-3xl lg:text-4xl font-bold text-[#0a1a3a] mb-6">
               Why will you choose<br />
-              <span className="text-[#0072ff]">our services?</span>
+              <span className="text-primary">our services?</span>
             </h2>
 
             <p className="text-gray-600 mb-8 leading-relaxed">
@@ -94,8 +94,8 @@ export default function About() {
             <div className="space-y-4 mb-8">
               {features.map((feature, index) => (
                 <div key={index} className="flex gap-3">
-                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-[#00c853]/10 flex items-center justify-center mt-0.5">
-                    <Check className="w-4 h-4 text-[#00c853]" />
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-secondary/10 flex items-center justify-center mt-0.5">
+                    <Check className="w-4 h-4 text-secondary" />
                   </div>
                   <p className="text-gray-600 text-sm leading-relaxed">{feature}</p>
                 </div>
@@ -103,7 +103,7 @@ export default function About() {
             </div>
 
             <a href="#services">
-              <Button className="bg-[#0072ff] hover:bg-[#005bb5] text-white px-8 py-6 text-base rounded-full">
+              <Button className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-base rounded-full">
                 View Details
               </Button>
             </a>
@@ -111,8 +111,8 @@ export default function About() {
             {/* Stats */}
             <div className="grid grid-cols-2 gap-8 mt-12 pt-8 border-t border-gray-100">
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full bg-[#0072ff]/10 flex items-center justify-center">
-                  <Users className="w-7 h-7 text-[#0072ff]" />
+                <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Users className="w-7 h-7 text-primary" />
                 </div>
                 <div>
                   <Counter end={301} suffix="+" />
@@ -120,8 +120,8 @@ export default function About() {
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full bg-[#00c853]/10 flex items-center justify-center">
-                  <Award className="w-7 h-7 text-[#00c853]" />
+                <div className="w-14 h-14 rounded-full bg-secondary/10 flex items-center justify-center">
+                  <Award className="w-7 h-7 text-secondary" />
                 </div>
                 <div>
                   <Counter end={36} suffix="+" />

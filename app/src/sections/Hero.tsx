@@ -124,51 +124,57 @@ export default function Hero() {
             ))}
           </div>
 
-          {/* Right Form - Floating Card Style */}
-          <div className="hidden lg:block z-10 relative">
-            <div className="bg-white rounded-3xl p-8 shadow-2xl max-w-md ml-auto animate-in slide-in-from-right duration-700">
-              <div className="mb-6">
-                <span className="text-secondary font-semibold text-sm uppercase tracking-wider">Book Now</span>
-                <h3 className="text-2xl font-bold text-primary mt-1">Online Appointment</h3>
-              </div>
+          {/* Right Content - Appointment Form */}
+          <div className="hidden lg:block z-10">
+            <div className="bg-primary p-10 rounded-3xl shadow-2xl relative overflow-hidden border-4 border-white/10">
+              {/* Decorative Circles */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2 pointer-events-none" />
               
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+              <div className="relative z-10">
+                <span className="text-secondary font-bold text-sm uppercase tracking-wider mb-2 block">24 / 7 Hours Service</span>
+                <h3 className="text-3xl font-bold text-white mb-8">Online Appointment</h3>
+                
+                <form onSubmit={handleSubmit} className="space-y-5">
                   <Input 
-                    placeholder="Your Name" 
-                    className="h-12 bg-gray-50 border-gray-200 focus:border-secondary focus:ring-secondary rounded-xl"
+                    placeholder="Your name*" 
+                    className="bg-white/10 border-white/10 text-white placeholder:text-gray-300 h-12 rounded-lg focus:bg-white/20 transition-colors"
                   />
                   <Input 
-                    placeholder="Phone Number" 
-                    className="h-12 bg-gray-50 border-gray-200 focus:border-secondary focus:ring-secondary rounded-xl"
+                    placeholder="Mobile number*" 
+                    className="bg-white/10 border-white/10 text-white placeholder:text-gray-300 h-12 rounded-lg focus:bg-white/20 transition-colors"
                   />
-                </div>
-                
-                <Input 
-                  placeholder="Email Address" 
-                  className="h-12 bg-gray-50 border-gray-200 focus:border-secondary focus:ring-secondary rounded-xl"
-                />
-                
-                <Select>
-                  <SelectTrigger className="h-12 bg-gray-50 border-gray-200 focus:border-secondary focus:ring-secondary rounded-xl text-gray-500">
-                    <SelectValue placeholder="Select Service" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {services.map((s) => (
-                      <SelectItem key={s} value={s.toLowerCase()}>{s}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                
-                <Textarea 
-                  placeholder="Message" 
-                  className="min-h-[100px] bg-gray-50 border-gray-200 focus:border-secondary focus:ring-secondary rounded-xl resize-none"
-                />
-                
-                <Button type="submit" className="w-full h-12 bg-secondary hover:bg-secondary/90 text-white font-bold rounded-xl text-base shadow-lg shadow-secondary/25 transition-all hover:scale-[1.02]">
-                  Get Appointment
-                </Button>
-              </form>
+                  <Input 
+                    placeholder="Mail address*" 
+                    className="bg-white/10 border-white/10 text-white placeholder:text-gray-300 h-12 rounded-lg focus:bg-white/20 transition-colors"
+                  />
+                  
+                  <Select>
+                    <SelectTrigger className="bg-white/10 border-white/10 text-gray-300 h-12 rounded-lg focus:bg-white/20">
+                      <SelectValue placeholder="Choose services" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {services.map((service) => (
+                        <SelectItem key={service} value={service.toLowerCase()}>
+                          {service}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  
+                  <Textarea 
+                    placeholder="Type message..." 
+                    className="bg-white/10 border-white/10 text-white placeholder:text-gray-300 min-h-[100px] rounded-lg focus:bg-white/20 transition-colors resize-none"
+                  />
+                  
+                  <Button 
+                    type="submit"
+                    className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold h-14 rounded-lg text-lg mt-2"
+                  >
+                    Get a Quote
+                  </Button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
