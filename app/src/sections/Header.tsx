@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Phone, Mail, Facebook, Twitter, Linkedin, Instagram, Search, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 
 const navLinks = [
   { name: 'Home', href: '#home' },
@@ -14,17 +13,7 @@ const navLinks = [
 ];
 
 export default function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
@@ -35,138 +24,64 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full">
-      {/* Top Bar */}
-      <div className="bg-[#0a1a3a] text-white py-2.5">
-        <div className="container mx-auto px-4 flex flex-wrap items-center justify-between">
-          <div className="flex items-center gap-6 text-sm">
-            <div className="flex items-center gap-2">
-              <Phone className="w-4 h-4 text-[#00c853]" />
-              <span className="text-gray-400">Call for help:</span>
-              <a href="tel:+12354623257" className="hover:text-[#00c853] transition-colors">
-                (+123) 5462 3257
-              </a>
+    <header className="w-full fixed top-0 z-50 bg-white shadow-sm">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo */}
+          <a href="#home" className="flex items-center gap-2">
+            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-bold text-xl">
+              B
             </div>
-            <div className="hidden sm:flex items-center gap-2">
-              <Mail className="w-4 h-4 text-[#00c853]" />
-              <span className="text-gray-400">Mail to us:</span>
-              <a href="mailto:info@optimalx.com" className="hover:text-[#00c853] transition-colors">
-                info@optimalx.com
-              </a>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#0072ff] transition-colors">
-              <Facebook className="w-4 h-4" />
-            </a>
-            <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#0072ff] transition-colors">
-              <Twitter className="w-4 h-4" />
-            </a>
-            <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#0072ff] transition-colors">
-              <Linkedin className="w-4 h-4" />
-            </a>
-            <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#0072ff] transition-colors">
-              <Instagram className="w-4 h-4" />
-            </a>
-          </div>
-        </div>
-      </div>
+            <span className="text-2xl font-bold text-primary">Bixol</span>
+          </a>
 
-      {/* Main Navigation */}
-      <div className={`transition-all duration-300 ${isScrolled ? 'fixed top-0 left-0 right-0 z-50 shadow-lg' : ''}`}>
-        <div className={`${isScrolled ? 'bg-white' : 'bg-[#0072ff]'}`}>
-          <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between h-20">
-              {/* Logo */}
-              <a href="#home" className="flex items-center">
-                <img 
-                  src="/images/logo-optimal-x.jpg" 
-                  alt="Optimal X" 
-                  className="h-14 w-auto object-contain"
-                />
-              </a>
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <button
+                key={link.name}
+                onClick={() => scrollToSection(link.href)}
+                className="text-sm font-medium text-gray-600 hover:text-primary transition-colors"
+              >
+                {link.name}
+              </button>
+            ))}
+            <Button className="bg-primary hover:bg-primary/90 text-white rounded-full px-6">
+              Get Quote
+            </Button>
+          </nav>
 
-              {/* Desktop Navigation */}
-              <nav className="hidden lg:flex items-center gap-1">
-                {navLinks.map((link) => (
-                  <button
-                    key={link.name}
-                    onClick={() => scrollToSection(link.href)}
-                    className={`px-4 py-2 text-sm font-medium transition-colors ${
-                      isScrolled 
-                        ? 'text-gray-700 hover:text-[#0072ff]' 
-                        : 'text-white hover:text-white/80'
-                    }`}
-                  >
-                    {link.name}
-                  </button>
-                ))}
-              </nav>
-
-              {/* Search & Mobile Menu */}
-              <div className="flex items-center gap-3">
-                {/* Search */}
-                <div className="relative hidden md:block">
-                  {isSearchOpen ? (
-                    <div className="flex items-center">
-                      <Input 
-                        type="text" 
-                        placeholder="Search..." 
-                        className="w-48 h-9 text-sm"
-                        autoFocus
-                      />
-                      <Button 
-                        variant="ghost" 
-                        size="icon" 
-                        className="ml-1"
-                        onClick={() => setIsSearchOpen(false)}
-                      >
-                        <X className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  ) : (
-                    <Button 
-                      variant="ghost" 
-                      size="icon"
-                      onClick={() => setIsSearchOpen(true)}
-                      className={isScrolled ? 'text-gray-700' : 'text-white hover:text-white/80'}
-                    >
-                      <Search className="w-5 h-5" />
-                    </Button>
-                  )}
-                </div>
-
-                {/* Mobile Menu Button */}
-                <Button 
-                  variant="ghost" 
-                  size="icon"
-                  className="lg:hidden"
-                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                >
-                  {isMobileMenuOpen ? (
-                    <X className={`w-6 h-6 ${isScrolled ? 'text-gray-700' : 'text-white'}`} />
-                  ) : (
-                    <Menu className={`w-6 h-6 ${isScrolled ? 'text-gray-700' : 'text-white'}`} />
-                  )}
-                </Button>
-              </div>
-            </div>
-          </div>
+          {/* Mobile Menu Button */}
+          <button
+            className="lg:hidden p-2 text-gray-600"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
+          </button>
         </div>
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden bg-white shadow-lg">
-            <nav className="flex flex-col py-4">
+          <div className="lg:hidden border-t border-gray-100 py-4">
+            <nav className="flex flex-col space-y-2">
               {navLinks.map((link) => (
                 <button
                   key={link.name}
                   onClick={() => scrollToSection(link.href)}
-                  className="px-6 py-3 text-left text-gray-700 hover:bg-gray-50 hover:text-[#0072ff] transition-colors"
+                  className="px-4 py-2 text-left text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-primary rounded-lg transition-colors"
                 >
                   {link.name}
                 </button>
               ))}
+              <div className="pt-2 px-4">
+                <Button className="w-full bg-primary hover:bg-primary/90 text-white rounded-full">
+                  Get Quote
+                </Button>
+              </div>
             </nav>
           </div>
         )}

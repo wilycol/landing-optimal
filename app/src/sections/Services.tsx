@@ -50,86 +50,63 @@ export default function Services() {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
 
   return (
-    <section id="services" className="py-20 lg:py-28 bg-gray-50">
+    <section id="services" className="py-24 bg-[#f4f5f8]">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-[#0072ff] font-medium mb-2 block">Featured Service</span>
-          <h2 className="text-3xl lg:text-4xl font-bold text-[#0a1a3a] mb-4">
-            We provide the best services<br />
-            <span className="text-[#0072ff]">for your help!</span>
-          </h2>
-          <p className="text-gray-600">
-            Optimal X is a design studio founded in London and expanded our services, 
-            and become a multinational firm, offering solutions Worldwide.
-          </p>
+        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+          <div className="max-w-2xl">
+            <span className="text-secondary font-bold uppercase tracking-wider text-sm mb-3 block">Featured Service</span>
+            <h2 className="text-4xl lg:text-5xl font-bold text-primary leading-tight">
+              We provide the best services<br />
+              for your help!
+            </h2>
+          </div>
+          <div className="max-w-md text-gray-500 pb-2">
+            <p>
+              Optimal X is a design studio founded in London and expanded our services, 
+              and become a multinational firm, offering solutions Worldwide.
+            </p>
+          </div>
         </div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service) => {
             const Icon = service.icon;
             return (
               <div
                 key={service.id}
-                className="group relative bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+                className="group relative bg-white rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/5"
                 onMouseEnter={() => setHoveredId(service.id)}
                 onMouseLeave={() => setHoveredId(null)}
               >
-                {/* Image */}
-                <div className="relative h-48 overflow-hidden">
+                {/* Image Area */}
+                <div className="relative h-64 overflow-hidden">
                   <img 
                     src={service.image} 
                     alt={service.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   
-                  {/* Icon */}
-                  <div className="absolute bottom-4 left-4 w-12 h-12 bg-[#0072ff] rounded-lg flex items-center justify-center">
-                    <Icon className="w-6 h-6 text-white" />
+                  {/* Floating Icon */}
+                  <div className="absolute -bottom-8 right-8 w-16 h-16 bg-secondary rounded-full flex items-center justify-center shadow-lg z-10 group-hover:bg-primary transition-colors duration-300">
+                    <Icon className="w-8 h-8 text-white" />
                   </div>
                 </div>
 
                 {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-[#0a1a3a] mb-3 group-hover:text-[#0072ff] transition-colors">
+                <div className="pt-12 pb-8 px-8">
+                  <h3 className="text-2xl font-bold text-primary mb-4 group-hover:text-secondary transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                  <p className="text-gray-500 mb-6 leading-relaxed">
                     {service.description}
                   </p>
-                  <a 
-                    href="#contact"
-                    className="inline-flex items-center text-[#0072ff] font-medium text-sm hover:text-[#00c853] transition-colors"
-                  >
-                    Read More
-                    <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-                  </a>
-                </div>
-
-                {/* Hover Overlay */}
-                <div 
-                  className={`absolute inset-0 bg-[#0072ff]/95 flex flex-col items-center justify-center p-6 transition-opacity duration-300 ${
-                    hoveredId === service.id ? 'opacity-100' : 'opacity-0 pointer-events-none'
-                  }`}
-                >
-                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4">
-                    <Icon className="w-8 h-8 text-white" />
+                  
+                  <div className="flex items-center text-sm font-bold uppercase tracking-wider text-primary group-hover:text-secondary transition-colors cursor-pointer">
+                    Read More <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3 text-center">
-                    {service.title}
-                  </h3>
-                  <p className="text-white/80 text-sm text-center mb-6">
-                    {service.description}
-                  </p>
-                  <a 
-                    href="#contact"
-                    className="inline-flex items-center bg-white text-[#0072ff] px-6 py-2 rounded-full font-medium text-sm hover:bg-[#00c853] hover:text-white transition-colors"
-                  >
-                    Read More
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </a>
                 </div>
               </div>
             );

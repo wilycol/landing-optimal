@@ -11,16 +11,16 @@ module.exports = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
+          DEFAULT: "#062265", // Azul oscuro principal de Bixol
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
+          DEFAULT: "#ff7f4d", // Naranja de acento Bixol
           foreground: "hsl(var(--secondary-foreground))",
         },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive) / <alpha-value>)",
-          foreground: "hsl(var(--destructive-foreground) / <alpha-value>)",
+        muted: {
+          DEFAULT: "#f4f5f8", // Fondo gris claro de secciones
+          foreground: "hsl(var(--muted-foreground))",
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",

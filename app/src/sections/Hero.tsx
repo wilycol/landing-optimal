@@ -68,7 +68,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="relative min-h-[700px] lg:min-h-[800px] overflow-hidden">
+    <section id="home" className="relative h-[850px] overflow-hidden bg-zinc-900">
       {/* Background Slides */}
       {slides.map((slide, index) => (
         <div
@@ -81,123 +81,162 @@ export default function Hero() {
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${slide.image})` }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
+          <div className="absolute inset-0 bg-black/50" />
         </div>
       ))}
 
       {/* Content */}
-      <div className="relative container mx-auto px-4 py-20 lg:py-32">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="relative container h-full mx-auto px-4">
+        <div className="grid lg:grid-cols-2 gap-12 items-center h-full pt-20">
           {/* Left Content */}
-          <div className="text-white">
+          <div className="text-white z-10">
             {slides.map((slide, index) => (
               <div
                 key={slide.id}
                 className={`transition-all duration-700 ${
                   index === currentSlide 
-                    ? 'opacity-100 translate-y-0' 
-                    : 'opacity-0 translate-y-8 absolute'
+                    ? 'opacity-100 translate-y-0 relative' 
+                    : 'opacity-0 translate-y-8 absolute inset-0 pointer-events-none'
                 }`}
               >
+                <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
+                  <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
+                  <span className="text-sm font-medium tracking-wide uppercase">Optimal X Cleaning</span>
+                </div>
+                
+                <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-6">
+                  {slide.title} <br />
+                  <span className="text-secondary">{slide.titleHighlight}</span>
+                </h1>
+                
+                <p className="text-lg text-gray-200 mb-8 max-w-xl leading-relaxed">
+                  {slide.subtitle}
+                </p>
+
+                <div className="flex flex-wrap gap-4">
+                  <Button size="lg" className="bg-primary hover:bg-primary/90 text-white px-8 h-14 rounded-full text-base font-semibold">
+                    Our Services
+                  </Button>
+                  <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white hover:text-primary h-14 px-8 rounded-full text-base font-semibold">
+                    Contact Us
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Right Form - Floating Card Style */}
+          <div className="hidden lg:block z-10 relative">
+            <div className="bg-white rounded-3xl p-8 shadow-2xl max-w-md ml-auto animate-in slide-in-from-right duration-700">
+              <div className="mb-6">
+                <span className="text-secondary font-semibold text-sm uppercase tracking-wider">Book Now</span>
+                <h3 className="text-2xl font-bold text-primary mt-1">Online Appointment</h3>
+              </div>
+              
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <Input 
+                    placeholder="Your Name" 
+                    className="h-12 bg-gray-50 border-gray-200 focus:border-secondary focus:ring-secondary rounded-xl"
+                  />
+                  <Input 
+                    placeholder="Phone Number" 
+                    className="h-12 bg-gray-50 border-gray-200 focus:border-secondary focus:ring-secondary rounded-xl"
+                  />
+                </div>
+                
+                <Input 
+                  placeholder="Email Address" 
+                  className="h-12 bg-gray-50 border-gray-200 focus:border-secondary focus:ring-secondary rounded-xl"
+                />
+                
+                <Select>
+                  <SelectTrigger className="h-12 bg-gray-50 border-gray-200 focus:border-secondary focus:ring-secondary rounded-xl text-gray-500">
+                    <SelectValue placeholder="Select Service" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {services.map((s) => (
+                      <SelectItem key={s} value={s.toLowerCase()}>{s}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                
+                <Textarea 
+                  placeholder="Message" 
+                  className="min-h-[100px] bg-gray-50 border-gray-200 focus:border-secondary focus:ring-secondary rounded-xl resize-none"
+                />
+                
+                <Button type="submit" className="w-full h-12 bg-secondary hover:bg-secondary/90 text-white font-bold rounded-xl text-base shadow-lg shadow-secondary/25 transition-all hover:scale-[1.02]">
+                  Get Appointment
+                </Button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
                 {index === currentSlide && (
                   <>
-                    <p className="text-lg mb-4 max-w-lg">{slide.subtitle}</p>
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2">
-                      {slide.title}
-                    </h1>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#00c853] mb-8">
-                      {slide.titleHighlight}
-                    </h2>
                   </>
                 )}
               </div>
             ))}
-
-            {/* Video Button */}
-            <div className="flex items-center gap-6 mt-8">
-              <a 
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 group"
-              >
-                <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-[#0072ff] transition-colors">
-                  <Play className="w-6 h-6 text-white ml-1" fill="white" />
-                </div>
-                <span className="text-white font-medium">Watch Our Video</span>
-              </a>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4 mt-10">
-              <a 
-                href="#services"
-                className="inline-flex items-center gap-2 bg-[#0072ff] text-white px-6 py-3 rounded-full font-medium hover:bg-[#005bb5] transition-colors"
-              >
-                Our Services
-                <Settings className="w-5 h-5" />
-              </a>
-            </div>
           </div>
 
-          {/* Right Content - Quote Form */}
-          <div className="bg-[#0072ff] rounded-lg p-6 lg:p-8 shadow-2xl">
-            <div className="text-center mb-6">
-              <p className="text-white/80 text-sm mb-1">24 / 7 Hours Service</p>
-              <h3 className="text-2xl font-bold text-white">Online Appointment</h3>
+          {/* Right Form - Floating Card Style */}
+          <div className="hidden lg:block z-10 relative">
+            <div className="bg-white rounded-3xl p-8 shadow-2xl max-w-md ml-auto animate-in slide-in-from-right duration-700">
+              <div className="mb-6">
+                <span className="text-secondary font-semibold text-sm uppercase tracking-wider">Book Now</span>
+                <h3 className="text-2xl font-bold text-primary mt-1">Online Appointment</h3>
+              </div>
+              
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <Input 
+                    placeholder="Your Name" 
+                    className="h-12 bg-gray-50 border-gray-200 focus:border-secondary focus:ring-secondary rounded-xl"
+                  />
+                  <Input 
+                    placeholder="Phone Number" 
+                    className="h-12 bg-gray-50 border-gray-200 focus:border-secondary focus:ring-secondary rounded-xl"
+                  />
+                </div>
+                
+                <Input 
+                  placeholder="Email Address" 
+                  className="h-12 bg-gray-50 border-gray-200 focus:border-secondary focus:ring-secondary rounded-xl"
+                />
+                
+                <Select>
+                  <SelectTrigger className="h-12 bg-gray-50 border-gray-200 focus:border-secondary focus:ring-secondary rounded-xl text-gray-500">
+                    <SelectValue placeholder="Select Service" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {services.map((s) => (
+                      <SelectItem key={s} value={s.toLowerCase()}>{s}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                
+                <Textarea 
+                  placeholder="Message" 
+                  className="min-h-[100px] bg-gray-50 border-gray-200 focus:border-secondary focus:ring-secondary rounded-xl resize-none"
+                />
+                
+                <Button type="submit" className="w-full h-12 bg-secondary hover:bg-secondary/90 text-white font-bold rounded-xl text-base shadow-lg shadow-secondary/25 transition-all hover:scale-[1.02]">
+                  Get Appointment
+                </Button>
+              </form>
             </div>
-
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <Input
-                type="text"
-                placeholder="Your name*"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="bg-white/10 border-white/20 text-white placeholder:text-white/60 h-12"
-                required
-              />
-              <Input
-                type="tel"
-                placeholder="Mobile number*"
-                value={formData.mobile}
-                onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
-                className="bg-white/10 border-white/20 text-white placeholder:text-white/60 h-12"
-                required
-              />
-              <Input
-                type="email"
-                placeholder="Mail address*"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="bg-white/10 border-white/20 text-white placeholder:text-white/60 h-12"
-                required
-              />
-              <Select
-                value={formData.service}
-                onValueChange={(value) => setFormData({ ...formData, service: value })}
-              >
-                <SelectTrigger className="bg-white/10 border-white/20 text-white h-12 [&>span]:text-white/60">
-                  <SelectValue placeholder="Choose services" />
-                </SelectTrigger>
-                <SelectContent>
-                  {services.map((service) => (
-                    <SelectItem key={service} value={service.toLowerCase().replace(' ', '-')}>
-                      {service}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Textarea
-                placeholder="Type message..."
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className="bg-white/10 border-white/20 text-white placeholder:text-white/60 min-h-[100px] resize-none"
-              />
-              <Button 
-                type="submit"
-                className="w-full bg-[#0a1a3a] hover:bg-[#0d2249] text-white h-12 text-lg font-medium"
-              >
-                Get a Quote
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </form>
