@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -14,9 +14,7 @@ import {
 const slides = [
   {
     id: 1,
-    subtitle: 'Optimal X is professionalism in the cleaning industry by providing top-quality cleaning and related services',
-    title: 'We are Professional',
-    titleHighlight: 'Cleaning Services',
+    title: 'Our company is a collective of amazing people',
     image: '/images/hero-bg.jpg',
   },
   {
@@ -92,26 +90,34 @@ export default function Hero() {
                     : 'opacity-0 translate-y-8 absolute inset-0 pointer-events-none'
                 }`}
               >
-                <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
-                  <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
-                  <span className="text-sm font-medium tracking-wide uppercase">Optimal X Cleaning</span>
-                </div>
+                {slide.subtitle && (
+                  <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
+                    <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
+                    <span className="text-sm font-medium tracking-wide uppercase">Optimal X Cleaning</span>
+                  </div>
+                )}
                 
-                <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-6">
-                  {slide.title} <br />
-                  <span className="text-secondary">{slide.titleHighlight}</span>
+                <h1 className="text-5xl lg:text-7xl font-extrabold leading-tight mb-6">
+                  {slide.title}
+                  {slide.titleHighlight && <br />}
+                  {slide.titleHighlight && <span className="text-secondary">{slide.titleHighlight}</span>}
                 </h1>
                 
-                <p className="text-lg text-gray-200 mb-8 max-w-xl leading-relaxed">
-                  {slide.subtitle}
-                </p>
-
+                {slide.subtitle && (
+                  <p className="text-xl text-gray-200 mb-8 max-w-lg leading-relaxed">
+                    {slide.subtitle}
+                  </p>
+                )}
+                
                 <div className="flex flex-wrap gap-4">
-                  <Button size="lg" className="bg-primary hover:bg-primary/90 text-white px-8 h-14 rounded-full text-base font-semibold">
+                  <Button 
+                    size="lg" 
+                    className="bg-primary hover:bg-primary/90 text-white rounded-full pl-8 pr-1 py-1 h-14 text-lg font-bold group"
+                  >
                     Our Services
-                  </Button>
-                  <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white hover:text-primary h-14 px-8 rounded-full text-base font-semibold">
-                    Contact Us
+                    <span className="ml-4 w-12 h-12 bg-white rounded-full flex items-center justify-center group-hover:bg-gray-100 transition-colors">
+                      <Settings className="w-6 h-6 text-primary animate-spin-slow" />
+                    </span>
                   </Button>
                 </div>
               </div>

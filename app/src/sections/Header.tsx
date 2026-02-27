@@ -32,7 +32,7 @@ export default function Header() {
             <img 
               src="/images/logo-optimal-x.jpg" 
               alt="Optimal X" 
-              className="h-10 w-auto object-contain" 
+              className="h-14 w-auto object-contain" 
             />
           </a>
 
