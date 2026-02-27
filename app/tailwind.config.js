@@ -11,11 +11,11 @@ module.exports = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#062265", // Azul oscuro principal de Bixol
+          DEFAULT: "#062265", // Azul oscuro principal de Optimal X
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
-          DEFAULT: "#ff7f4d", // Naranja de acento Bixol
+          DEFAULT: "#ff7f4d", // Naranja de acento Optimal X
           foreground: "hsl(var(--secondary-foreground))",
         },
         muted: {

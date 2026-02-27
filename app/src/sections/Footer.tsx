@@ -21,7 +21,11 @@ export default function Footer() {
           <div>
             <div className="mb-8">
               <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-lg">
-                <span className="text-primary font-bold text-xl">Optimal X</span>
+                <img 
+                  src="/images/logo-optimal-x.jpg" 
+                  alt="Optimal X" 
+                  className="h-8 w-auto object-contain" 
+                />
               </div>
             </div>
             <p className="text-gray-300 text-base mb-8 leading-relaxed">

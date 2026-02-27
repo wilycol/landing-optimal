@@ -25,10 +25,10 @@
     --ring: 222 90% 21%;
     --radius: 0.5rem;
     
-    /* Optimal X Colors - Adapted to Bixol */
+    /* Optimal X Colors */
     --optimal-blue: 222 90% 21%;
     --optimal-dark-blue: 222 90% 15%;
-    --optimal-green: 17 100% 65%; /* Replaced with Bixol Orange */
+    --optimal-green: 17 100% 65%; /* Replaced with Optimal X Orange */
     --optimal-light-green: 17 100% 75%;
     --optimal-navy: 222 90% 21%;
   }

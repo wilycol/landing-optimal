@@ -29,10 +29,11 @@ export default function Header() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <a href="#home" className="flex items-center gap-2">
-            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-bold text-xl">
-              B
-            </div>
-            <span className="text-2xl font-bold text-primary">Bixol</span>
+            <img 
+              src="/images/logo-optimal-x.jpg" 
+              alt="Optimal X" 
+              className="h-10 w-auto object-contain" 
+            />
           </a>
 
           {/* Desktop Navigation */}
