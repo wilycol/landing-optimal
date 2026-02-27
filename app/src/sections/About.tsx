@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Sparkles, Check, Users, Award } from 'lucide-react';
+import { Sparkles, Check, Users, Shirt } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const features = [
@@ -60,18 +60,48 @@ export default function About() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left - Image */}
           <div className="relative">
-            <div className="relative rounded-lg overflow-hidden shadow-2xl">
+            <div className="relative rounded-lg overflow-hidden shadow-2xl mb-12">
               <img 
                 src="/images/about-team.jpg" 
                 alt="Optimal X Cleaning Team" 
                 className="w-full h-auto object-cover"
               />
+              
+               {/* Experience Badge */}
+              <div className="absolute bottom-8 right-0 translate-x-1/2 bg-primary text-white p-8 rounded-full shadow-xl z-10 w-40 h-40 flex flex-col items-center justify-center text-center border-4 border-white">
+                <div className="text-4xl font-bold mb-1">2020</div>
+                <div className="text-xs uppercase tracking-wider font-medium">Established</div>
+              </div>
             </div>
-            {/* Experience Badge */}
-            <div className="absolute -bottom-6 -right-6 bg-primary text-white p-6 rounded-lg shadow-xl">
-              <div className="text-5xl font-bold">15</div>
-              <div className="text-sm">Years of<br />Experience</div>
+           
+            {/* Stats Row */}
+            <div className="flex flex-wrap gap-12 mt-8">
+              <div className="flex items-start gap-4">
+                <div className="mt-1">
+                  <Shirt className="w-10 h-10 text-secondary stroke-[1.5]" />
+                </div>
+                <div>
+                  <Counter end={1542} suffix="+" />
+                  <p className="text-gray-500 font-medium mt-1">Satisfied Clients</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="mt-1">
+                  <Users className="w-10 h-10 text-secondary stroke-[1.5]" />
+                </div>
+                <div>
+                  <Counter end={182} suffix="+" />
+                  <p className="text-gray-500 font-medium mt-1">Expert Team</p>
+                </div>
+              </div>
             </div>
+          </div>
+
+          {/* Stats - Now below the image on mobile, but part of left column structure visually */}
+          <div className="lg:col-span-2 grid grid-cols-2 gap-8 mt-4 pt-8 border-t border-gray-100 lg:hidden">
+             {/* Mobile only duplicate or move? Better to restructure grid. 
+                 But to match Bixol layout where stats are below the image area:
+             */}
           </div>
 
           {/* Right - Content */}
@@ -107,28 +137,6 @@ export default function About() {
                 View Details
               </Button>
             </a>
-
-            {/* Stats */}
-            <div className="grid grid-cols-2 gap-8 mt-12 pt-8 border-t border-gray-100">
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Users className="w-7 h-7 text-primary" />
-                </div>
-                <div>
-                  <Counter end={301} suffix="+" />
-                  <p className="text-gray-500 text-sm">Satisfied Clients</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full bg-secondary/10 flex items-center justify-center">
-                  <Award className="w-7 h-7 text-secondary" />
-                </div>
-                <div>
-                  <Counter end={36} suffix="+" />
-                  <p className="text-gray-500 text-sm">Expert Team</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
