@@ -73,34 +73,43 @@ export default function Services() {
             return (
               <div
                 key={service.id}
-                className="group relative bg-white rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/5"
+                className="group relative bg-white rounded-3xl overflow-hidden p-10 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl h-full flex flex-col items-center text-center min-h-[420px]"
               >
-                {/* Image Area */}
-                <div className="relative h-64 overflow-hidden">
+                {/* Hover Background Image & Overlay */}
+                <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <div className="absolute inset-0 bg-[#062265]/90 z-10" /> {/* Primary color overlay */}
                   <img 
                     src={service.image} 
                     alt={service.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
-                  {/* Floating Icon */}
-                  <div className="absolute -bottom-8 right-8 w-16 h-16 bg-secondary rounded-full flex items-center justify-center shadow-lg z-10 group-hover:bg-primary transition-colors duration-300">
-                    <Icon className="w-8 h-8 text-white" />
-                  </div>
                 </div>
 
                 {/* Content */}
-                <div className="pt-12 pb-8 px-8">
-                  <h3 className="text-2xl font-bold text-primary mb-4 group-hover:text-secondary transition-colors">
+                <div className="relative z-10 flex flex-col items-center h-full">
+                  {/* Icon Circle */}
+                  <div className="relative w-24 h-24 mb-8 flex items-center justify-center">
+                    {/* Dashed Border Circle (Default) */}
+                    <div className="absolute inset-0 rounded-full border-2 border-dashed border-primary/30 group-hover:border-white/30 transition-colors duration-300" />
+                    
+                    {/* Inner Circle */}
+                    <div className="w-16 h-16 bg-primary/5 rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors duration-300">
+                      <Icon className="w-8 h-8 text-primary group-hover:text-white transition-colors duration-300" />
+                    </div>
+                  </div>
+
+                  <h3 className="text-2xl font-bold text-primary mb-6 group-hover:text-white transition-colors duration-300">
                     {service.title}
                   </h3>
-                  <p className="text-gray-500 mb-6 leading-relaxed">
+                  
+                  <p className="text-gray-500 mb-8 leading-relaxed group-hover:text-white/90 transition-colors duration-300">
                     {service.description}
                   </p>
                   
-                  <div className="flex items-center text-sm font-bold uppercase tracking-wider text-primary group-hover:text-secondary transition-colors cursor-pointer">
-                    Read More <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                  <div className="mt-auto">
+                    <button className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-primary group-hover:text-white transition-colors duration-300 bg-transparent hover:bg-transparent">
+                      Read More <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </button>
                   </div>
                 </div>
               </div>
