@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Home, Briefcase, Wrench, Droplets } from 'lucide-react';
 
 const tabContent = {
   philosophy: {
@@ -17,38 +18,73 @@ const tabContent = {
 };
 
 const progressData = [
-  { label: 'Home Cleaning', percentage: 90, color: 'bg-[#0072ff]' },
-  { label: 'Office Cleaning', percentage: 75, color: 'bg-[#00c853]' },
-  { label: 'Plumbing Service', percentage: 50, color: 'bg-[#0072ff]' },
-  { label: 'Window Cleaning', percentage: 90, color: 'bg-[#00c853]' },
+  { label: 'Home Cleaning', percentage: 90, color: 'text-[#0072ff]', icon: Home },
+  { label: 'Office Cleaning', percentage: 75, color: 'text-[#00c853]', icon: Briefcase },
+  { label: 'Plumbing Service', percentage: 50, color: 'text-[#0072ff]', icon: Wrench },
+  { label: 'Window Cleaning', percentage: 90, color: 'text-[#00c853]', icon: Droplets },
 ];
 
-function ProgressBar({ 
+function CircularProgress({ 
   label, 
   percentage, 
   color, 
+  icon: Icon,
   isVisible 
 }: { 
   label: string; 
   percentage: number; 
   color: string;
+  icon: any;
   isVisible: boolean;
 }) {
+  const radius = 50;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference - (percentage / 100) * circumference;
+
   return (
-    <div className="mb-6">
-      <div className="flex justify-between mb-2">
-        <span className="font-medium text-[#0a1a3a]">{label}</span>
-        <span className="font-bold text-[#0072ff]">{percentage}%</span>
+    <div className="flex flex-col items-center group cursor-pointer">
+      <div className="relative w-40 h-40 mb-6">
+        {/* Background Circle */}
+        <svg className="w-full h-full transform -rotate-90">
+          <circle
+            cx="80"
+            cy="80"
+            r={radius}
+            stroke="#f3f4f6"
+            strokeWidth="8"
+            fill="transparent"
+          />
+          {/* Progress Circle */}
+          <circle
+            cx="80"
+            cy="80"
+            r={radius}
+            stroke="currentColor"
+            strokeWidth="8"
+            fill="transparent"
+            strokeDasharray={circumference}
+            strokeDashoffset={isVisible ? strokeDashoffset : circumference}
+            className={`${color} transition-all duration-1500 ease-out`}
+            style={{ transitionDuration: '1.5s' }}
+          />
+        </svg>
+        
+        {/* Icon & Percentage in Center */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <div className="relative mb-1">
+             <Icon className={`w-8 h-8 ${color} transition-transform duration-300 group-hover:-translate-y-2 group-hover:scale-110`} />
+             <div className="absolute -top-2 -right-2 bg-primary text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+               {percentage}%
+             </div>
+          </div>
+        </div>
       </div>
-      <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
-        <div 
-          className={`h-full ${color} rounded-full transition-all duration-1500 ease-out`}
-          style={{ 
-            width: isVisible ? `${percentage}%` : '0%',
-            transitionDuration: '1.5s'
-          }}
-        />
-      </div>
+      
+      <h4 className="text-xl font-bold text-[#0a1a3a] mb-2">{label}</h4>
+      <p className="text-gray-500 text-sm text-center max-w-[200px]">
+        As a app web crawler expert, I help organizations.
+      </p>
+      <div className={`h-1 w-12 mt-4 rounded-full ${color.replace('text-', 'bg-')}`} />
     </div>
   );
 }
@@ -139,33 +175,39 @@ export default function WhyChooseUs() {
             </div>
           </div>
 
-          {/* Right Content - Progress Bars */}
-          <div className="lg:pt-16">
-            <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-100">
-              <h3 className="text-xl font-bold text-[#0a1a3a] mb-8">Service Quality</h3>
-              {progressData.map((item) => (
-                <ProgressBar
-                  key={item.label}
-                  label={item.label}
-                  percentage={item.percentage}
-                  color={item.color}
-                  isVisible={isVisible}
-                />
-              ))}
+          {/* Right Content - Image */}
+          <div className="lg:pt-8 relative">
+             <div className="relative rounded-lg overflow-hidden shadow-2xl h-full min-h-[400px]">
+              <img 
+                src="/images/service-indoor.jpg" 
+                alt="Cleaning Service Quality"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a1a3a]/40 to-transparent" />
             </div>
 
-            {/* Stats Cards */}
-            <div className="grid grid-cols-2 gap-4 mt-6">
-              <div className="bg-[#0072ff] text-white p-6 rounded-lg text-center">
-                <div className="text-4xl font-bold mb-1">98%</div>
-                <div className="text-white/80 text-sm">Customer Satisfaction</div>
-              </div>
-              <div className="bg-[#00c853] text-white p-6 rounded-lg text-center">
-                <div className="text-4xl font-bold mb-1">24/7</div>
-                <div className="text-white/80 text-sm">Support Available</div>
+            {/* Floating Stats Card */}
+            <div className="absolute bottom-8 -left-8 bg-white p-6 rounded-lg shadow-xl max-w-xs border-l-4 border-primary hidden lg:block">
+              <div className="flex items-center gap-4 mb-2">
+                <div className="text-4xl font-bold text-primary">25+</div>
+                <div className="text-gray-600 text-sm font-medium leading-tight">Years of<br/>Experience</div>
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Circular Metrics Row */}
+        <div className="mt-24 grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+          {progressData.map((item) => (
+            <CircularProgress
+              key={item.label}
+              label={item.label}
+              percentage={item.percentage}
+              color={item.color}
+              icon={item.icon}
+              isVisible={isVisible}
+            />
+          ))}
         </div>
       </div>
     </section>
