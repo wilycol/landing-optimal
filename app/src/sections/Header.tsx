@@ -24,37 +24,46 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full fixed top-0 z-50 bg-white shadow-sm">
+    <header className="w-full fixed top-0 z-50 bg-[#0072ff] shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="#home" className="flex items-center gap-2">
-            <img 
-              src="/images/logo-optimal-x.jpg" 
-              alt="Optimal X" 
-              className="h-14 w-auto object-contain" 
-            />
-          </a>
+          <div className="bg-white h-[120px] w-[260px] flex items-center justify-center rounded-b-3xl shadow-xl relative z-10 top-0">
+             <a href="#home" className="flex items-center gap-2">
+               <img 
+                 src="/images/logo-optimal-x.jpg" 
+                 alt="Optimal X" 
+                 className="h-16 w-auto object-contain" 
+               />
+             </a>
+          </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-10">
             {navLinks.map((link) => (
               <button
                 key={link.name}
                 onClick={() => scrollToSection(link.href)}
-                className="text-sm font-medium text-gray-600 hover:text-primary transition-colors"
+                className="text-base font-bold text-white hover:text-white/80 transition-colors capitalize tracking-wide"
               >
                 {link.name}
               </button>
             ))}
-            <Button className="bg-primary hover:bg-primary/90 text-white rounded-full px-6">
-              Get Quote
-            </Button>
+            
+            {/* Search Bar Desktop */}
+            <div className="relative ml-8 w-72">
+               <input 
+                 type="text" 
+                 placeholder="Search" 
+                 className="w-full h-12 pl-6 pr-12 bg-white/20 border-2 border-white/30 rounded-full text-white placeholder:text-white/80 focus:outline-none focus:bg-white/30 transition-all font-medium"
+               />
+               <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white stroke-[3]" />
+            </div>
           </nav>
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 text-gray-600"
+            className="lg:hidden p-2 text-white"
             onClick={() => setIsMobileMenuOpen(true)}
           >
             <Menu className="w-6 h-6" />
