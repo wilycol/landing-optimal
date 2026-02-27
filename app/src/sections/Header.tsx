@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Menu, X, Search } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 const navLinks = [
   { name: 'Home', href: '#home' },
