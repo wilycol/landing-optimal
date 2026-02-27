@@ -1,4 +1,6 @@
-import { ArrowRight, Droplets, Home, Wrench, Building2, Bath, Sun } from 'lucide-react';
+import { ArrowRight, Droplets, Home, Wrench, Building2, Bath, Sun, ChevronLeft, ChevronRight } from 'lucide-react';
+import useEmblaCarousel from 'embla-carousel-react';
+import { useCallback } from 'react';
 
 const services = [
   {
