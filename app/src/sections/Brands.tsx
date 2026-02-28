@@ -1,6 +1,5 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import { cn } from '@/lib/utils';
 
 // SVG Logos for brands
 const Logos = {
