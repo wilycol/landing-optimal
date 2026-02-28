@@ -194,6 +194,26 @@ export default function Hero() {
         </div>
       </div>
 
+      {/* Decorative Sparkles (Bottom Left) */}
+      <div className="absolute bottom-24 left-[5%] z-20 hidden md:block pointer-events-none">
+        <div className="relative w-32 h-32">
+          {/* Star 1 - Large (Top Right) */}
+          <svg className="absolute top-2 right-2 w-10 h-10 text-white animate-pulse" viewBox="0 0 24 24" fill="currentColor" style={{ animationDuration: '2s' }}>
+            <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
+          </svg>
+          
+          {/* Star 2 - Medium (Bottom Center) */}
+          <svg className="absolute bottom-4 left-1/2 -translate-x-1/2 w-8 h-8 text-white animate-pulse" viewBox="0 0 24 24" fill="currentColor" style={{ animationDuration: '3s', animationDelay: '0.5s' }}>
+            <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
+          </svg>
+          
+          {/* Star 3 - Small (Top Left) */}
+          <svg className="absolute top-6 left-2 w-6 h-6 text-white animate-pulse" viewBox="0 0 24 24" fill="currentColor" style={{ animationDuration: '2.5s', animationDelay: '1s' }}>
+            <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
+          </svg>
+        </div>
+      </div>
+
       {/* Slide Navigation */}
       <div className="hidden md:flex absolute bottom-8 left-12 gap-2 z-20">
         <button
