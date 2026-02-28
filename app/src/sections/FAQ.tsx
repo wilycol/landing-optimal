@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronDown, HelpCircle } from 'lucide-react';
+import { ChevronDown, Sparkles, X } from 'lucide-react';
 
 const faqs = [
   {
@@ -32,57 +32,11 @@ export default function FAQ() {
   };
 
   return (
-    <section className="py-20 lg:py-28 bg-gray-50">
+    <section className="py-20 lg:py-28 bg-white overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-          {/* Left Content */}
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <HelpCircle className="w-5 h-5 text-[#00c853]" />
-              <span className="text-[#0072ff] font-medium">FAQ</span>
-            </div>
-            <h2 className="text-3xl lg:text-4xl font-bold text-[#0a1a3a] mb-4">
-              You will learn more from<br />
-              <span className="text-[#0072ff]">our FAQ.</span>
-            </h2>
-            <p className="text-gray-600 mb-8">
-              Follow our latest news and thoughts which focuses exclusively on design, art, vintage, and also work updates.
-            </p>
-
-            {/* FAQ Items */}
-            <div className="space-y-4">
-              {faqs.map((faq) => (
-                <div 
-                  key={faq.id}
-                  className="bg-white rounded-lg shadow-sm overflow-hidden"
-                >
-                  <button
-                    onClick={() => toggleFaq(faq.id)}
-                    className="w-full flex items-center justify-between p-5 text-left hover:bg-gray-50 transition-colors"
-                  >
-                    <span className="font-medium text-[#0a1a3a] pr-4">{faq.question}</span>
-                    <ChevronDown 
-                      className={`w-5 h-5 text-[#0072ff] flex-shrink-0 transition-transform duration-300 ${
-                        openId === faq.id ? 'rotate-180' : ''
-                      }`}
-                    />
-                  </button>
-                  <div 
-                    className={`overflow-hidden transition-all duration-300 ${
-                      openId === faq.id ? 'max-h-48' : 'max-h-0'
-                    }`}
-                  >
-                    <div className="px-5 pb-5 text-gray-600 text-sm leading-relaxed">
-                      {faq.answer}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right Content - Image */}
-          <div className="relative lg:sticky lg:top-24">
+          {/* Left Content - Image */}
+          <div className="relative lg:sticky lg:top-24 order-2 lg:order-1">
             <div className="relative rounded-lg overflow-hidden shadow-2xl">
               <img 
                 src="/images/service-bathroom.jpg" 
@@ -92,10 +46,68 @@ export default function FAQ() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a1a3a]/60 to-transparent" />
             </div>
             
-            {/* Floating Card */}
-            <div className="absolute -bottom-6 -left-6 bg-[#0072ff] text-white p-6 rounded-lg shadow-xl max-w-xs">
+            {/* Floating Card - Moved to right side for balance since image is on left */}
+            <div className="absolute -bottom-6 -right-6 lg:-right-10 bg-[#0072ff] text-white p-6 rounded-lg shadow-xl max-w-xs z-10">
               <div className="text-4xl font-bold mb-2">24/7</div>
               <div className="text-white/80 text-sm">Customer Support Available</div>
+            </div>
+          </div>
+
+          {/* Right Content - FAQ */}
+          <div className="order-1 lg:order-2">
+            <div className="flex items-center gap-2 mb-4">
+              <Sparkles className="w-5 h-5 text-[#0072ff]" />
+              <span className="text-[#0a1a3a] font-bold uppercase tracking-wider text-sm">FAQ</span>
+            </div>
+            <h2 className="text-4xl lg:text-5xl font-bold text-[#062265] mb-6 leading-tight">
+              You will learn more from<br />
+              our FAQ.
+            </h2>
+            <p className="text-gray-500 mb-10 text-lg">
+              Follow our latest news and thoughts which focuses exclusively on design, art, vintage, and also work updates.
+            </p>
+
+            {/* FAQ Items */}
+            <div className="space-y-4">
+              {faqs.map((faq) => (
+                <div 
+                  key={faq.id}
+                  className={`rounded-lg transition-all duration-300 overflow-hidden ${
+                    openId === faq.id 
+                      ? 'bg-white shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)] border-l-4 border-[#0072ff]' 
+                      : 'bg-white border border-gray-100 hover:border-gray-200'
+                  }`}
+                >
+                  <button
+                    onClick={() => toggleFaq(faq.id)}
+                    className="w-full flex items-center justify-between p-6 text-left transition-colors"
+                  >
+                    <span className={`font-bold text-lg pr-4 ${
+                        openId === faq.id ? 'text-[#062265]' : 'text-[#062265]'
+                    }`}>
+                        {faq.question}
+                    </span>
+                    <div className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${
+                        openId === faq.id ? 'bg-gray-100' : 'bg-transparent'
+                    }`}>
+                        {openId === faq.id ? (
+                            <X className="w-4 h-4 text-gray-400" />
+                        ) : (
+                            <ChevronDown className="w-5 h-5 text-[#0072ff]" />
+                        )}
+                    </div>
+                  </button>
+                  <div 
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      openId === faq.id ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
+                    }`}
+                  >
+                    <div className="px-6 pb-6 text-gray-500 text-base leading-relaxed">
+                      {faq.answer}
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
