@@ -1,9 +1,11 @@
 import { Calendar, User, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const blogPosts = [
   {
     id: 1,
     title: 'How stay calm from the first time.',
+    slug: 'how-stay-calm-from-the-first-time',
     excerpt: 'Learn the best practices for maintaining a clean and organized space from day one.',
     image: '/images/blog-home.jpg',
     author: 'Optimal X Team',
@@ -13,6 +15,7 @@ const blogPosts = [
   {
     id: 2,
     title: 'Our proprietary enables Quality.',
+    slug: 'our-proprietary-enables-quality',
     excerpt: 'Discover our unique approach to delivering exceptional cleaning services.',
     image: '/images/blog-toilet.jpg',
     author: 'Optimal X Team',
@@ -22,6 +25,7 @@ const blogPosts = [
   {
     id: 3,
     title: 'Locate Optimal X Office Near You.',
+    slug: 'locate-optimal-x-office-near-you',
     excerpt: 'Find our nearest office and get in touch with our professional team.',
     image: '/images/blog-office.jpg',
     author: 'Optimal X Team',
@@ -55,24 +59,26 @@ export default function Blog() {
             >
               {/* Image Container with Shine Effect */}
               <div className="relative h-64 overflow-hidden">
-                <img 
-                  src={post.image}
-                  alt={post.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                
-                {/* Shine Effect Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full skew-x-[-25deg] group-hover:animate-shine z-10 w-[150%] h-full pointer-events-none" />
+                <Link to={`/blog/${post.slug}`} className="block w-full h-full">
+                  <img 
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  
+                  {/* Shine Effect Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full skew-x-[-25deg] group-hover:animate-shine z-10 w-[150%] h-full pointer-events-none" />
 
-                {/* Dark Overlay on Hover */}
-                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                
-                {/* Category Badge */}
-                <div className="absolute top-4 left-4 z-20">
-                  <span className="bg-[#0072ff] text-white text-xs font-bold uppercase tracking-wide px-3 py-1.5 rounded">
-                    {post.category}
-                  </span>
-                </div>
+                  {/* Dark Overlay on Hover */}
+                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                  
+                  {/* Category Badge */}
+                  <div className="absolute top-4 left-4 z-20">
+                    <span className="bg-[#0072ff] text-white text-xs font-bold uppercase tracking-wide px-3 py-1.5 rounded">
+                      {post.category}
+                    </span>
+                  </div>
+                </Link>
               </div>
 
               {/* Content */}
@@ -89,16 +95,16 @@ export default function Blog() {
                 </div>
 
                 <h3 className="text-xl font-bold text-[#0a1a3a] mb-3 group-hover:text-[#0072ff] transition-colors line-clamp-2">
-                  <a href="#">{post.title}</a>
+                  <Link to={`/blog/${post.slug}`}>{post.title}</Link>
                 </h3>
 
-                <a 
-                  href="#"
+                <Link 
+                  to={`/blog/${post.slug}`}
                   className="inline-flex items-center text-[#0a1a3a] font-bold text-sm hover:text-[#0072ff] transition-colors mt-2"
                 >
                   Read more
                   <ArrowRight className="w-4 h-4 ml-2" />
-                </a>
+                </Link>
               </div>
             </article>
           ))}

@@ -72,11 +72,16 @@ module.exports = {
           "0%,70%,100%": { opacity: "1" },
           "20%,50%": { opacity: "0" },
         },
+        shine: {
+          "0%": { transform: "translateX(-100%) skewX(-25deg)" },
+          "100%": { transform: "translateX(200%) skewX(-25deg)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "caret-blink": "caret-blink 1.25s ease-out infinite",
+        shine: "shine 0.8s ease-in-out forwards",
       },
     },
   },
