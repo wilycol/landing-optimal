@@ -53,69 +53,55 @@ export default function Blog() {
               key={post.id}
               className="group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
             >
-              {/* Image */}
-              <div className="relative h-56 overflow-hidden">
+              {/* Image Container with Shine Effect */}
+              <div className="relative h-64 overflow-hidden">
                 <img 
                   src={post.image}
                   alt={post.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                
+                {/* Shine Effect Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full skew-x-[-25deg] group-hover:animate-shine z-10 w-[150%] h-full pointer-events-none" />
+
+                {/* Dark Overlay on Hover */}
+                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                 
                 {/* Category Badge */}
-                <div className="absolute top-4 left-4">
-                  <span className="bg-[#0072ff] text-white text-xs font-medium px-3 py-1 rounded-full">
+                <div className="absolute top-4 left-4 z-20">
+                  <span className="bg-[#0072ff] text-white text-xs font-bold uppercase tracking-wide px-3 py-1.5 rounded">
                     {post.category}
                   </span>
-                </div>
-
-                {/* Date Overlay */}
-                <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="flex items-center gap-2 text-sm">
-                    <Calendar className="w-4 h-4" />
-                    {post.date}
-                  </div>
                 </div>
               </div>
 
               {/* Content */}
-              <div className="p-6">
-                <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
-                  <div className="flex items-center gap-1">
-                    <User className="w-4 h-4" />
+              <div className="p-8">
+                <div className="flex items-center gap-4 text-sm text-gray-500 mb-4 border-b border-gray-100 pb-4">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-4 h-4 text-[#0072ff]" />
+                    {post.date}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <User className="w-4 h-4 text-[#0072ff]" />
                     {post.author}
                   </div>
                 </div>
 
                 <h3 className="text-xl font-bold text-[#0a1a3a] mb-3 group-hover:text-[#0072ff] transition-colors line-clamp-2">
-                  {post.title}
+                  <a href="#">{post.title}</a>
                 </h3>
-
-                <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                  {post.excerpt}
-                </p>
 
                 <a 
                   href="#"
-                  className="inline-flex items-center text-[#0072ff] font-medium text-sm hover:text-[#00c853] transition-colors"
+                  className="inline-flex items-center text-[#0a1a3a] font-bold text-sm hover:text-[#0072ff] transition-colors mt-2"
                 >
-                  Read More
-                  <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                  Read more
+                  <ArrowRight className="w-4 h-4 ml-2" />
                 </a>
               </div>
             </article>
           ))}
-        </div>
-
-        {/* View All Button */}
-        <div className="text-center mt-12">
-          <a 
-            href="#"
-            className="inline-flex items-center gap-2 bg-[#0072ff] text-white px-8 py-3 rounded-full font-medium hover:bg-[#005bb5] transition-colors"
-          >
-            View All Posts
-            <ArrowRight className="w-5 h-5" />
-          </a>
         </div>
       </div>
     </section>
