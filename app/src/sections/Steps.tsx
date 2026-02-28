@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Search, Calculator, Target, Sparkles, ArrowRight } from 'lucide-react';
+import { Search, Calculator, Target, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const steps = [
