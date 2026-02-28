@@ -27,12 +27,12 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="bg-white h-[120px] w-[260px] flex items-center justify-center rounded-b-3xl shadow-xl relative z-10 top-0">
+          <div className="bg-white h-[130px] w-[260px] flex items-center justify-center rounded-b-3xl shadow-xl relative z-10 top-0">
              <a href="#home" className="flex items-center gap-2">
                <img 
                  src="/images/logo-optimal-x.jpg" 
                  alt="Optimal X" 
-                 className="h-16 w-auto object-contain" 
+                 className="h-32 w-auto object-contain" 
                />
              </a>
           </div>

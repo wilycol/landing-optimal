@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus } from 'lucide-react';
+import { Plus, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { portfolioItems } from '@/data/portfolio';
 
@@ -17,7 +17,10 @@ export default function Portfolio() {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-[#0072ff] font-medium mb-2 block">Our Portfolio</span>
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <Sparkles className="w-5 h-5 text-[#0072ff]" />
+            <span className="text-[#0a1a3a] font-bold text-lg">Our Portfolio</span>
+          </div>
           <h2 className="text-3xl lg:text-4xl font-bold text-[#0a1a3a] mb-4">
             Some work from our<br />
             <span className="text-[#0072ff]">memorable gallery.</span>

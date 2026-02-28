@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Home, Briefcase, Wrench, Droplets } from 'lucide-react';
+import { Home, Briefcase, Wrench, Droplets, Sparkles } from 'lucide-react';
 
 const tabContent = {
   philosophy: {
@@ -117,7 +117,10 @@ export default function WhyChooseUs() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
           {/* Left Content */}
           <div>
-            <span className="text-[#0072ff] font-medium mb-2 block">Why choose us?</span>
+            <div className="flex items-center gap-2 mb-2">
+              <Sparkles className="w-5 h-5 text-[#0072ff]" />
+              <span className="text-[#0a1a3a] font-bold text-lg">Why choose us?</span>
+            </div>
             <h2 className="text-3xl lg:text-4xl font-bold text-[#0a1a3a] mb-4">
               For our best quality<br />
               <span className="text-[#0072ff]">you have chosen us</span>

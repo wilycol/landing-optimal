@@ -1,4 +1,4 @@
-import { ArrowRight, Droplets, Home, Wrench, Building2, Bath, Sun, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, Droplets, Home, Wrench, Building2, Bath, Sun, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { useCallback } from 'react';
 
@@ -71,7 +71,10 @@ export default function Services() {
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
           <div className="max-w-2xl">
-            <span className="text-secondary font-bold uppercase tracking-wider text-sm mb-3 block">Featured Service</span>
+            <div className="flex items-center gap-2 mb-3">
+              <Sparkles className="w-5 h-5 text-[#0072ff]" />
+              <span className="text-[#0a1a3a] font-bold text-lg">Featured Service</span>
+            </div>
             <h2 className="text-4xl lg:text-5xl font-bold text-primary leading-tight">
               We provide the best services<br />
               for your help!
