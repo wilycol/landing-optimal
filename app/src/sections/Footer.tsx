@@ -25,11 +25,11 @@ export default function Footer() {
     <footer className="relative bg-[#030e29] text-white pt-24 mt-0">
        {/* Floating Logo Badge Overlapping Contact Section */}
        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30">
-        <div className="w-32 h-32 bg-white rounded-full shadow-2xl flex items-center justify-center p-5 border-[8px] border-[#030e29]">
+        <div className="w-32 h-32 bg-white rounded-full shadow-2xl flex items-center justify-center p-3 border-[8px] border-[#030e29] overflow-hidden">
           <img 
             src="/images/logo-optimal-x.jpg" 
             alt="Optimal X Logo" 
-            className="w-full h-auto object-contain"
+            className="w-full h-full object-contain"
           />
         </div>
       </div>
