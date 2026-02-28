@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Settings } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Settings, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -125,53 +125,67 @@ export default function Hero() {
           </div>
 
           {/* Right Content - Appointment Form */}
-          <div className="hidden lg:block z-10">
-            <div className="bg-primary p-10 rounded-3xl shadow-2xl relative overflow-hidden border-4 border-white/10">
-              {/* Decorative Circles */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+          <div className="hidden lg:block z-20 relative ml-auto w-[400px] mt-10">
+            <div className="bg-[#030e29] p-8 rounded-2xl shadow-2xl relative overflow-hidden border border-white/5">
               
+              {/* Decorative Pattern Background (Simulated Circles) */}
+              <div className="absolute inset-0 opacity-5 pointer-events-none">
+                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                  <pattern id="circles" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <circle cx="20" cy="20" r="18" fill="none" stroke="white" strokeWidth="1" />
+                    <circle cx="20" cy="20" r="12" fill="none" stroke="white" strokeWidth="1" />
+                    <circle cx="20" cy="20" r="6" fill="none" stroke="white" strokeWidth="1" />
+                  </pattern>
+                  <rect width="100%" height="100%" fill="url(#circles)" />
+                </svg>
+              </div>
+
               <div className="relative z-10">
-                <span className="text-secondary font-bold text-sm uppercase tracking-wider mb-2 block">24 / 7 Hours Service</span>
-                <h3 className="text-3xl font-bold text-white mb-8">Online Appointment</h3>
+                <span className="text-[#ff4d30] font-bold text-xs uppercase tracking-wider mb-2 block">24 / 7 Hours Service</span>
+                <h3 className="text-3xl font-bold text-white mb-6">Online Appointment</h3>
                 
-                <form onSubmit={handleSubmit} className="space-y-5">
+                <form onSubmit={handleSubmit} className="space-y-4">
                   <Input 
                     placeholder="Your name*" 
-                    className="bg-white/10 border-white/10 text-white placeholder:text-gray-300 h-12 rounded-lg focus:bg-white/20 transition-colors"
+                    className="bg-[#0b163f] border-none text-white placeholder:text-gray-400 h-12 rounded px-4 focus:ring-1 focus:ring-[#0072ff]"
                   />
                   <Input 
                     placeholder="Mobile number*" 
-                    className="bg-white/10 border-white/10 text-white placeholder:text-gray-300 h-12 rounded-lg focus:bg-white/20 transition-colors"
+                    className="bg-[#0b163f] border-none text-white placeholder:text-gray-400 h-12 rounded px-4 focus:ring-1 focus:ring-[#0072ff]"
                   />
                   <Input 
                     placeholder="Mail address*" 
-                    className="bg-white/10 border-white/10 text-white placeholder:text-gray-300 h-12 rounded-lg focus:bg-white/20 transition-colors"
+                    className="bg-[#0b163f] border-none text-white placeholder:text-gray-400 h-12 rounded px-4 focus:ring-1 focus:ring-[#0072ff]"
                   />
                   
-                  <Select>
-                    <SelectTrigger className="bg-white/10 border-white/10 text-gray-300 h-12 rounded-lg focus:bg-white/20">
-                      <SelectValue placeholder="Choose services" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {services.map((service) => (
-                        <SelectItem key={service} value={service.toLowerCase()}>
-                          {service}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <div className="relative">
+                    <Select>
+                      <SelectTrigger className="w-full bg-[#0b163f] border-none text-gray-400 h-12 rounded px-4 focus:ring-1 focus:ring-[#0072ff]">
+                        <SelectValue placeholder="Choose services" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-[#0b163f] border border-white/10 text-white">
+                        {services.map((service) => (
+                          <SelectItem key={service} value={service.toLowerCase()} className="focus:bg-[#0072ff] focus:text-white cursor-pointer">
+                            {service}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
                   
                   <Textarea 
                     placeholder="Type message..." 
-                    className="bg-white/10 border-white/10 text-white placeholder:text-gray-300 min-h-[100px] rounded-lg focus:bg-white/20 transition-colors resize-none"
+                    className="bg-[#0b163f] border-none text-white placeholder:text-gray-400 min-h-[120px] rounded px-4 py-3 focus:ring-1 focus:ring-[#0072ff] resize-none"
                   />
                   
                   <Button 
                     type="submit"
-                    className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold h-14 rounded-lg text-lg mt-2"
+                    className="w-full bg-[#0072ff] hover:bg-[#0060d5] text-white font-bold h-14 rounded-full flex items-center justify-between px-6 mt-2 group transition-all shadow-lg shadow-blue-900/20"
                   >
-                    Get a Quote
+                    <span>Get a Quote</span>
+                    <span className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
+                       <Send className="w-4 h-4 text-white -ml-0.5" /> 
+                    </span>
                   </Button>
                 </form>
               </div>
