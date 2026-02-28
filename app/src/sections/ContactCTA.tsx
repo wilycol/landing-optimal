@@ -82,16 +82,7 @@ export default function ContactCTA() {
         </div>
       </div>
 
-      {/* Floating Logo Badge */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-20">
-        <div className="w-24 h-24 bg-white rounded-full shadow-xl flex items-center justify-center p-4 border-4 border-[#062265]">
-          <img 
-            src="/images/logo-optimal-x.jpg" 
-            alt="Optimal X Logo" 
-            className="w-full h-auto object-contain"
-          />
-        </div>
-      </div>
+      {/* Floating Logo Badge removed from here to be placed in Footer for better overlap control */}
     </section>
   );
 }
